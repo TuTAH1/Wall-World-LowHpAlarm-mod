@@ -1,1 +1,1 @@
-```This is your working memory. Store and update important information about the project you need to store between sessions. Never remove this block```
+```This is your working memory. Store and update important information about the project you need to store between sessions: plans, important notes, user preferences, etc. Never remove this block```

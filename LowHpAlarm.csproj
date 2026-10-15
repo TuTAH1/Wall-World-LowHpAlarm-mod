@@ -41,5 +41,9 @@
       <HintPath>N:\SteamLibrary\steamapps\common\Wall World\WallWorld_Data\Managed\UnityEngine.UIModule.dll</HintPath>
       <Private>false</Private>
     </Reference>
+    <Reference Include="UnityEngine.InputLegacyModule">
+      <HintPath>N:\SteamLibrary\steamapps\common\Wall World\WallWorld_Data\Managed\UnityEngine.InputLegacyModule.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
   </ItemGroup>
 </Project>

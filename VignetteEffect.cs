@@ -79,24 +79,20 @@ namespace LowHpAlarm
                 float t = 1f - hpPercent / LowHpAlarmPlugin.VisualAlarmHp.Value;
                 targetAlpha = Mathf.Lerp(MinAlpha, MaxAlpha, t) * LowHpAlarmPlugin.VignetteIntensity.Value;
             }
+            _currentAlpha = targetAlpha;
 
-            // If above threshold, instantly fade out (no continuous Update loop to lerp)
-            if (targetAlpha == 0f)
-            {
-                _currentAlpha = 0f;
-            }
-            else
-            {
-                // Smoothly interpolate current alpha towards target
-                float oldAlpha = _currentAlpha;
-                _currentAlpha = Mathf.Lerp(_currentAlpha, targetAlpha, Time.deltaTime * SmoothSpeed);
+            //TODO: move to separate method that called regularly 
+            //\ Smoothly interpolate current alpha towards target
+            //\ float oldAlpha = _currentAlpha;
+            //\ _currentAlpha = Mathf.Lerp(_currentAlpha, targetAlpha, Time.deltaTime * SmoothSpeed);
 
-                // Log only when alpha changes significantly to avoid log spam
-                if (Mathf.Abs(oldAlpha - _currentAlpha) > AlphaLogThreshold)
-                {
-                    LowHpAlarmPlugin.Log($"UpdateVignette: alpha={oldAlpha:F2} -> {_currentAlpha:F2} (target={targetAlpha:F2}, HP={hpPercent:F1}%)");
-                }
-            }
+            //\ Log only when alpha changes significantly to avoid log spam
+            //\ if (Mathf.Abs(oldAlpha - _currentAlpha) > AlphaLogThreshold)
+            //\ {
+            //\     LowHpAlarmPlugin.Log($"UpdateVignette: alpha={oldAlpha:F2} -> {_currentAlpha:F2} (target={targetAlpha:F2}, HP={hpPercent:F1}%)");
+            //\ }
+
+            LowHpAlarmPlugin.Log($"UpdateVignette: alpha= {_currentAlpha:F2} (HP={hpPercent:F1}%)");
 
             // Apply the alpha to the vignette's color
             Color c = _vignetteImage.color;

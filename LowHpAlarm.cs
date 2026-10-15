@@ -14,7 +14,7 @@ namespace LowHpAlarm
 	{
 		public const string GUID = "com.wallworld.lowhp";
 		public const string NAME = "Low HP Alarm";
-		public const string VERSION = "1.1.3"; // Incremented version for refactor
+		public const string VERSION = "1.2.0";
 		
 		private const string TALENT_WINDOW_ID = "talents";
 		
@@ -34,8 +34,10 @@ namespace LowHpAlarm
 		
 		private static float menuLockUntil;
 		
-		private static SpiderEntity playerSpider;
+		internal static SpiderEntity playerSpider;
 		private static float lastHpPercent = 100f;
+		
+		private static TestModeHandler _testModeHandler;
 		
 		internal static BepInEx.Logging.ManualLogSource pluginLogger;
 		
@@ -48,7 +50,7 @@ namespace LowHpAlarm
 		{
 			pluginLogger = Logger;
 			
-			TestMode = Config.Bind("General", "test", false, "If true, auto-open menu on ANY HP decrease");
+			TestMode = Config.Bind("General", "test", false, "If true, W adds 10% max HP, S removes 10% max HP");
 			VisualAlarmHp = Config.Bind("General", "visualAlarmHp", 30f, "HP% where red vignette starts (0 = disabled)");
 			AudioAlarmHp = Config.Bind("General", "audioAlarmHp", 25f, "HP% where alarm sound plays (0 = disabled)");
 			MenuOpenHp = Config.Bind("General", "menuOpenHp", 10f, "HP% where improvements menu auto-opens (0 = disabled)");
@@ -61,6 +63,11 @@ namespace LowHpAlarm
 			_audioEffect = new AudioEffect();
 			_vignetteEffect.Initialize();
 			_audioEffect.Initialize();
+			
+			// Create TestModeHandler as a dedicated MonoBehaviour so Update() is reliably called
+			GameObject testModeGo = new GameObject("TestModeHandler");
+			UnityEngine.Object.DontDestroyOnLoad(testModeGo);
+			_testModeHandler = testModeGo.AddComponent<TestModeHandler>();
 			
 			Harmony.CreateAndPatchAll(typeof(LowHpAlarmPlugin));
 			
@@ -248,12 +255,7 @@ namespace LowHpAlarm
 			{
 				Log($"Damage taken: {prevPercent:F1}% -> {percent:F1}% {GetHpStatus()}");
 				
-				if (TestMode.Value)
-				{
-					Log($"Test mode: Opening menu {GetHpStatus()}");
-					OpenTalentMenu();
-				}
-				else if (MenuOpenHp.Value > 0f && prevPercent > MenuOpenHp.Value && percent <= MenuOpenHp.Value && percent > 0f)
+				if (MenuOpenHp.Value > 0f && prevPercent > MenuOpenHp.Value && percent <= MenuOpenHp.Value && percent > 0f)
 				{
 					Log($"Low HP threshold crossed: Opening menu {GetHpStatus()}");
 					OpenTalentMenu();
