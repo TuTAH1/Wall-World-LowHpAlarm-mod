@@ -5,6 +5,10 @@ namespace LowHpAlarm
 {
 	public static class Utils
 	{
+		/// <summary>
+		/// Parses a hex color string to a Color. Supports formats:
+		/// <c>#rgb</c>, <c>#rgba</c>, <c>#rrggbb</c>, <c>#rrggbbaa</c> (with or without leading #).
+		/// </summary>
 		public static Color ParseHexColor(string hex)
 		{
 			try
@@ -14,6 +18,7 @@ namespace LowHpAlarm
 				
 				if (hex.Length == 3)
 				{
+					// #rgb -> expand to #rrggbb
 					r = Convert.ToInt32(hex.Substring(0, 1) + hex.Substring(0, 1), 16);
 					g = Convert.ToInt32(hex.Substring(1, 1) + hex.Substring(1, 1), 16);
 					b = Convert.ToInt32(hex.Substring(2, 1) + hex.Substring(2, 1), 16);
@@ -21,6 +26,7 @@ namespace LowHpAlarm
 				}
 				else if (hex.Length == 4)
 				{
+					// #rgba -> expand to #rrggbbaa
 					r = Convert.ToInt32(hex.Substring(0, 1) + hex.Substring(0, 1), 16);
 					g = Convert.ToInt32(hex.Substring(1, 1) + hex.Substring(1, 1), 16);
 					b = Convert.ToInt32(hex.Substring(2, 1) + hex.Substring(2, 1), 16);
@@ -28,6 +34,7 @@ namespace LowHpAlarm
 				}
 				else if (hex.Length == 6)
 				{
+					// #rrggbb
 					r = Convert.ToInt32(hex.Substring(0, 2), 16);
 					g = Convert.ToInt32(hex.Substring(2, 2), 16);
 					b = Convert.ToInt32(hex.Substring(4, 2), 16);
@@ -35,6 +42,7 @@ namespace LowHpAlarm
 				}
 				else if (hex.Length == 8)
 				{
+					// #rrggbbaa
 					r = Convert.ToInt32(hex.Substring(0, 2), 16);
 					g = Convert.ToInt32(hex.Substring(2, 2), 16);
 					b = Convert.ToInt32(hex.Substring(4, 2), 16);

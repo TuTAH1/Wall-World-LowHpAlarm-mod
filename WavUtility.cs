@@ -3,6 +3,10 @@ using System.IO;
 
 public static class WavUtility
 {
+    /// <summary>
+    /// Converts WAV byte data to an AudioClip. Handles WAV files with metadata chunks (e.g., LIST)
+    /// by skipping non-data chunks until the 'data' chunk is found.
+    /// </summary>
     public static AudioClip ToAudioClip(byte[] wavData, string name)
     {
         // Convert byte array to AudioClip
