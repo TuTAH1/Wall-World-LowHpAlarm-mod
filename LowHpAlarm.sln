@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.14.37628.2 d17.14
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LowHpAlarm", "LowHpAlarm.csproj", "{6AEAF9D2-6678-8E62-D661-FD0A8B700C85}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{6AEAF9D2-6678-8E62-D661-FD0A8B700C85}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6AEAF9D2-6678-8E62-D661-FD0A8B700C85}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6AEAF9D2-6678-8E62-D661-FD0A8B700C85}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6AEAF9D2-6678-8E62-D661-FD0A8B700C85}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {31879E1F-AC40-4A6E-A130-F6D7DC598EFB}
+	EndGlobalSection
+EndGlobal
